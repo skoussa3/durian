@@ -1,4 +1,5 @@
 const vm = require('vm');
+const pg = require('pg');
 const pool = new pg.Pool(config);
 const express = require('express');
 const router = express.Router();
@@ -16,16 +17,16 @@ router.get('/vm', function(req, res) {
     res.send(result);
 });
 
-// http://localhost:3000/eval?code=this.process.env
-   
+// http://localhost:3000/handle?code=this.process.env
 router.get('/handle', function(req, res) {
-// BAD: the category might have SQL special characters in it
-
-    var query1 = "SELECT ITEM,PRICE FROM PRODUCT WHERE ITEM_CATEGORY='"
-             + req.params.category + "' ORDER BY PRICE";
-    pool.query(query1, [], function(err, results) {
-    // process results
+    // BAD: the category might have SQL special characters in it
+    
+        var query1 = "SELECT ITEM,PRICE FROM PRODUCT WHERE ITEM_CATEGORY='"
+                 + req.params.category + "' ORDER BY PRICE";
+        pool.query(query1, [], function(err, results) {
+        // process results
+        });
     });
-});
+    
 
 module.exports = router;
