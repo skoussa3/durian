@@ -21,11 +21,11 @@ router.get('/vm', function(req, res) {
 router.get('/handle', function(req, res) {
 // BAD: the category might have SQL special characters in it
 
-var query1 = "SELECT ITEM,PRICE FROM PRODUCT WHERE ITEM_CATEGORY='"
+    var query1 = "SELECT ITEM,PRICE FROM PRODUCT WHERE ITEM_CATEGORY='"
              + req.params.category + "' ORDER BY PRICE";
-pool.query(query1, [], function(err, results) {
+    pool.query(query1, [], function(err, results) {
     // process results
-
-  });
+    });
+});
 
 module.exports = router;
