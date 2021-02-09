@@ -1,5 +1,5 @@
 const vm = require('vm');
-
+const pool = new pg.Pool(config);
 const express = require('express');
 const router = express.Router();
 
