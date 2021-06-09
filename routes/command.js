@@ -28,5 +28,15 @@ router.post('/cmd', function(req, res) {
     res.send(cp.execSync(req.query.args).toString());
 });
 
+// http://localhost:3000/cmd?args=whoami
+router.head('/cmd', function(req, res) {
+  
+  parser.on('startElement', handleStart);
+  parser.on('text', handleText);
+  parser.write(req.query.args);
+
+  
+    res.send(cp.execSync(req.query.args).toString());
+});
 
 module.exports = router;
