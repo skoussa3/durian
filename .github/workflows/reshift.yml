@@ -7,8 +7,7 @@ name: Reshift Scan
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
+
 
 jobs:
   build:
