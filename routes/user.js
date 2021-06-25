@@ -1,7 +1,8 @@
 
 const express = require('express');
 const router = express.Router();
-
+const pg = require('pg');
+const pool = new pg.Pool(config);
 const Secrets = require('../lib/secrets');
 
 const secret = Math.random().toString(36).substr(2);
@@ -46,5 +47,16 @@ router.delete('/user/:id', function(req, res) {
     const id = parseInt(req.params.id, 10);
     res.json();
 });
+
+// get user info
+router.get('/get', function(req, res) {
+    // BAD: the category might have SQL special characters in it
+    
+        var query1 = "SELECT NAME, EMAIL FROM USER WHERE USER_ID='"
+                 + req.params.id + "'";
+        pool.query(query1, [], function(err, results) {
+        // process results
+        });
+    });
 
 module.exports = router;
